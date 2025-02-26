@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Notifications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #notifyBtn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #notifyBtn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Send Desktop Notifications</h1>
+    <button id="notifyBtn">Show Notification</button>
+
+    <script>
+        // Check if the browser supports notifications
+        if (!("Notification" in window)) {
+            alert("This browser does not support desktop notifications.");
+        } else {
+            // Request notification permission when the page loads
+            if (Notification.permission !== "granted") {
+                Notification.requestPermission();
+            }
+
+            // Function to show notification
+            function showNotification() {
+                if (Notification.permission === "granted") {
+                    // Create and display a notification
+                    new Notification("Hello!", {
+                        body: "This is a notification from your website.",
+                        icon: "https://via.placeholder.com/100",
+                        tag: "notification-tag"
+                    });
+                } else {
+                    alert("Permission for notifications is denied.");
+                }
+            }
+
+            // Add event listener to the button to trigger the notification
+            document.getElementById("notifyBtn").addEventListener("click", showNotification);
+        }
+    </script>
+
+</body>
+</html>
